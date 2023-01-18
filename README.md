@@ -1,0 +1,1 @@
+An extension that would analyze your chrome tab activity and uplift your mood if you feel stressed or help you maintain your productivity if thats what happening!

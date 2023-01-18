@@ -1,0 +1,17 @@
+{
+  "short_name": "SpotMood",
+  "name": "SpotMood",
+  "description": "Your spirit song.",
+  "icons": {
+    "16": "favicon.ico",
+    "48": "logo192.png",
+    "128": "logo512.png"
+  },
+  "permissions": ["tabs"],
+  "manifest_version": 3,
+  "version": "1",
+  "action": {
+    "default_popup": "index.html",
+    "default_title": "SpotMood"
+  }
+}
