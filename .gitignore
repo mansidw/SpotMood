@@ -8,7 +8,7 @@ tp.js
 .vscode
 # testing
 /coverage
-
+.env
 # production
 /build
 
