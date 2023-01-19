@@ -10,14 +10,16 @@ export function ErrorView() {
         Try to:
         <ul>
           <li style={{ fontFamily: "Roboto Mono" }}>
+            Make sure more than one tab is open
+          </li>
+          <li style={{ fontFamily: "Roboto Mono" }}>
             Make sure you have active internet connection
           </li>
           <li style={{ fontFamily: "Roboto Mono" }}>Reload website.</li>
-          <li style={{ fontFamily: "Roboto Mono" }}>Reopen addon popup</li>
-          <li style={{ fontFamily: "Roboto Mono" }}>Reinstal extension.</li>
+          <li style={{ fontFamily: "Roboto Mono" }}>Reinstall extension.</li>
         </ul>
         <br />
-        Still getting an error? Contact Mansi
+        Still getting an error? Contact mansi.dwivedi@spit.ac
       </Alert>
     </div>
   );
