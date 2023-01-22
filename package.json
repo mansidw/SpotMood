@@ -15,7 +15,8 @@
     "react-scripts": "5.0.1",
     "spotify-web-api-js": "^1.5.2",
     "web-vitals": "^2.1.4",
-    "xhr2": "^0.2.1"
+    "xhr2": "^0.2.1",
+    "youtube-music-api": "^1.0.6"
   },
   "scripts": {
     "start": "react-scripts start",

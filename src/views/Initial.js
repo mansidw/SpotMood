@@ -4,6 +4,8 @@ import { Typography } from "@mui/material";
 import Button from "@mui/material/Button/Button";
 import { emotionDetection } from "../service/huggingFace";
 import "../assets/css/Loading.css";
+import Neutral from "../components/neutral";
+import Joy from "../components/joy";
 
 export function InitialView(props) {
   const [emotion, setEmotion] = useState("");
@@ -29,7 +31,7 @@ export function InitialView(props) {
       totalTitle = totalTitle + opentabs.map((obj) => obj.title);
 
       emotionDetection({ inputs: totalTitle }).then((response) => {
-        // alert(JSON.stringify(response));
+        alert(JSON.stringify(response));
         if (
           response[0][0]["score"] - response[0][1]["score"] <= 0.2 &&
           (response[0][0]["label"] === "sadness" ||
@@ -39,6 +41,7 @@ export function InitialView(props) {
         ) {
           setEmotion("neutral");
         } else setEmotion(response[0][0]["label"]);
+        // alert(response[0][0]["label"]);
       });
     }
   }, [opentabs, props]);
@@ -48,6 +51,16 @@ export function InitialView(props) {
       <div className="center-view" style={{ paddingTop: "10px" }}>
         {!emotion ? (
           <>
+            <Typography
+              style={{
+                width: "400px",
+                textAlign: "center",
+                fontFamily: "Roboto Mono",
+              }}
+            >
+              Based on the tabs opened I suggest you are feeling...
+            </Typography>
+            <br />
             <div id="loaderSvgWrapper">
               <svg
                 xmlnsSvg="www.w3.org/2000/svg"
@@ -65,32 +78,33 @@ export function InitialView(props) {
           </>
         ) : (
           <>
-            <Button
-              size="large"
-              variant="contained"
-              color="success"
-              style={{ fontFamily: "Roboto Mono" }}
-              // onClick={doThis}
-            >
-              Get Analysis
-            </Button>
-            <Typography
-              style={{
-                width: "400px",
-                textAlign: "center",
-                fontFamily: "Roboto Mono",
-              }}
-            >
-              Based on the tabs opened I suggest you are feeling...
-            </Typography>
-            <br />
-            <Typography
+            {emotion === "neutral" && <Neutral />}
+            {emotion === "joy" && <Joy />}
+            {emotion === "love" && <Joy />}
+            {emotion === "surprise" && <Joy />}
+            {emotion === "anger" && <Neutral />}
+            {emotion === "fear" && <Neutral />}
+            {emotion === "sadness" && <Neutral />}
+            {/* <Typography
               variant="h4"
               component="h4"
               style={{ fontFamily: "Roboto Mono" }}
             >
               {emotion}
-            </Typography>
+            </Typography> */}
+            <Button
+              size="large"
+              variant="contained"
+              style={{
+                fontFamily: "Roboto Mono",
+                marginBottom: "20px",
+                backgroundColor: "#E3ACF9",
+                color: "#3D1766",
+              }}
+              // onClick={doThis}
+            >
+              Get Analysis
+            </Button>
           </>
         )}
         <br />

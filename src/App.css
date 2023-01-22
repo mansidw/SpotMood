@@ -7,7 +7,8 @@ body {
   text-align: center;
   padding: 8px;
   width: 400px;
-  height: 200px;
+  min-height: 200px;
+  overflow: hidden;
   font-family: 'Roboto Mono', monospace;
   /* background-color: #A0C3D2; */
   background-image: linear-gradient(to bottom right, #EAFDFC,#BFEAF5,#91D8E4,#82AAE3);
