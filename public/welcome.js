@@ -1,3 +1,4 @@
+/*global chrome*/
 const query = document.querySelector.bind(document);
 
 const removeComma = (string) => string.slice(0, string.length - 1).trim();
@@ -65,5 +66,24 @@ function focus() {
   query("#tag").focus();
 }
 
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
+async function saveValues(event) {
+  event.preventDefault();
+  const val = document.querySelector(".form__input").value;
+  const val2 = document.querySelector(".tags").children;
+  // const val2 = Array.from(query(".tags").children);
+  chrome.storage.local.set({ name: val }).then(() => {});
+  chrome.storage.local.set({ artists: val2 }).then(() => {});
+  alert("Thanks for filling out the details!Happy SpotMood :)");
+  await sleep(5000);
+  window.close();
+
+  // chrome.storage.local.get(["key"]).then((result) => {
+  //   console.log("Value currently is " + result.key);
+  // });
+}
+
 query(".input").addEventListener("click", focus);
 query("#tag").addEventListener("keyup", modifyTags);
+query(".form__content").addEventListener("submit", saveValues);

@@ -17,6 +17,9 @@ export function InitialView(props) {
         await chrome.tabs.query({ currentWindow: true }, (tabs) => {
           setOpentabs(tabs.map((tab) => ({ title: tab.title, url: tab.url })));
         });
+        await chrome.storage.local.get(["name"]).then((result) => {
+          alert(result.name, result.artists);
+        });
       } catch (e) {
         alert(e);
         props.setExtensionView("error");

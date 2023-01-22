@@ -35,7 +35,10 @@
 // };
 
 // chrome.action.onClicked.addListener((tab) => {
-//   init(tab);
+//   console.log("yes clicked");
+// chrome.storage.local.get(["key"]).then((result) => {
+//   console.log("Value currently is " + result.key);
+// });
 // });
 
 chrome.runtime.onInstalled.addListener(function (details) {
