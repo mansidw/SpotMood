@@ -76,12 +76,8 @@ async function saveValues(event) {
   chrome.storage.local.set({ name: val }).then(() => {});
   chrome.storage.local.set({ artists: val2 }).then(() => {});
   alert("Thanks for filling out the details!Happy SpotMood :)");
-  await sleep(5000);
+  await sleep(4000);
   window.close();
-
-  // chrome.storage.local.get(["key"]).then((result) => {
-  //   console.log("Value currently is " + result.key);
-  // });
 }
 
 query(".input").addEventListener("click", focus);

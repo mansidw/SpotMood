@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, Stack, Grid } from "@mui/material";
 
 const Joy = () => {
+  const [listen, setListen] = useState();
   return (
     <>
       <div style={{ fontFamily: "Roboto Mono" }}>
@@ -10,7 +11,7 @@ const Joy = () => {
         <span
           style={{ fontSize: "20px", color: "#B08BBB", fontWeight: "bold" }}
         >
-          a happy flower 🌺
+          a HAPPY flower 🌺
         </span>
       </div>
       <Grid

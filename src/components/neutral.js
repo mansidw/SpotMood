@@ -5,12 +5,20 @@ const Neutral = () => {
   return (
     <>
       <div style={{ fontFamily: "Roboto Mono" }}>
-        You feel like
+        You feel as
         <span> </span>
         <span
           style={{ fontSize: "20px", color: "#7B2869", fontWeight: "bold" }}
         >
-          pastel colours 🔆
+          NEUTRAL
+        </span>
+        <span> </span>
+        as
+        <span> </span>
+        <span
+          style={{ fontSize: "20px", color: "#3D1766", fontWeight: "bold" }}
+        >
+          WATER 🌊
         </span>
       </div>
       <img

@@ -17,11 +17,12 @@ export function InitialView(props) {
         await chrome.tabs.query({ currentWindow: true }, (tabs) => {
           setOpentabs(tabs.map((tab) => ({ title: tab.title, url: tab.url })));
         });
-        await chrome.storage.local.get(["name"]).then((result) => {
-          alert(result.name, result.artists);
+
+        await chrome.storage.local.get({ count: [] }).then((result) => {
+          alert(result.count);
         });
       } catch (e) {
-        alert(e);
+        alert("not loaded");
         props.setExtensionView("error");
       }
     })();
@@ -35,15 +36,119 @@ export function InitialView(props) {
 
       emotionDetection({ inputs: totalTitle }).then((response) => {
         alert(JSON.stringify(response));
+        let finalEmotion;
+        // if (
+        //   response[0][0]["score"] - response[0][1]["score"] <= 0.2 &&
+        //   (response[0][0]["label"] === "sadness" ||
+        //     response[0][0]["label"] === "anger") &&
+        //   (response[0][1]["label"] === "sadness" ||
+        //     response[0][1]["label"] === "anger")
+        // ) {
+        //   finalEmotion = "neutral";
+        //   setEmotion("neutral");
+        // } else {
+        //   finalEmotion = response[0][0]["label"];
+        //   setEmotion(response[0][0]["label"]);
+        // }
         if (
-          response[0][0]["score"] - response[0][1]["score"] <= 0.2 &&
-          (response[0][0]["label"] === "sadness" ||
-            response[0][0]["label"] === "anger") &&
-          (response[0][1]["label"] === "sadness" ||
-            response[0][1]["label"] === "anger")
+          response[0][0]["label"] === "love" ||
+          response[0][0]["label"] === "admiration" ||
+          response[0][0]["label"] === "approval" ||
+          response[0][0]["label"] === "joy" ||
+          response[0][0]["label"] === "caring" ||
+          response[0][0]["label"] === "gratitude" ||
+          response[0][0]["label"] === "optimisim" ||
+          response[0][0]["label"] === "excitement" ||
+          response[0][0]["label"] === "desire" ||
+          response[0][0]["label"] === "curiosity" ||
+          response[0][0]["label"] === "realization" ||
+          response[0][0]["label"] === "amusement" ||
+          response[0][0]["label"] === "surprise" ||
+          response[0][0]["label"] === "pride" ||
+          response[0][0]["label"] === "relief"
         ) {
+          finalEmotion = "happy";
+          setEmotion("happy");
+        } else if (
+          response[0][0]["label"] === "annoyance" ||
+          response[0][0]["label"] === "disapproval" ||
+          response[0][0]["label"] === "anger" ||
+          response[0][0]["label"] === "disgust"
+        ) {
+          finalEmotion = "anger";
+          setEmotion("anger");
+        } else if (
+          response[0][0]["label"] === "confusion" ||
+          response[0][0]["label"] === "sadness" ||
+          response[0][0]["label"] === "disappointment" ||
+          response[0][0]["label"] === "remorse" ||
+          response[0][0]["label"] === "embarrassment" ||
+          response[0][0]["label"] === "grief"
+        ) {
+          finalEmotion = "sadness";
+          setEmotion("sadness");
+        } else if (
+          response[0][0]["label"] === "fear" ||
+          response[0][0]["label"] === "nervousness"
+        ) {
+          finalEmotion = "fear";
+          setEmotion("fear");
+        } else {
+          finalEmotion = "neutral";
           setEmotion("neutral");
-        } else setEmotion(response[0][0]["label"]);
+        }
+        chrome.storage.local.get({ count: [] }).then((result) => {
+          if (result.count[0] === undefined) {
+            if (finalEmotion === "happy") {
+              chrome.storage.local
+                .set({ count: [1, 0, 0, 0, 0] })
+                .then(() => {});
+            } else if (finalEmotion === "anger") {
+              chrome.storage.local
+                .set({ count: [0, 1, 0, 0, 0] })
+                .then(() => {});
+            } else if (finalEmotion === "sadness") {
+              chrome.storage.local
+                .set({ count: [0, 0, 1, 0, 0] })
+                .then(() => {});
+            } else if (finalEmotion === "fear") {
+              chrome.storage.local
+                .set({ count: [0, 0, 0, 1, 0] })
+                .then(() => {});
+            } else {
+              chrome.storage.local
+                .set({ count: [0, 0, 0, 0, 1] })
+                .then(() => {});
+            }
+          } else {
+            let first = result.count[0];
+            let second = result.count[1];
+            let third = result.count[2];
+            let fourth = result.count[3];
+            let fifth = result.count[4];
+            if (finalEmotion === "happy") {
+              chrome.storage.local
+                .set({ count: [first + 1, second, third, fourth, fifth] })
+                .then(() => {});
+            } else if (finalEmotion === "anger") {
+              chrome.storage.local
+                .set({ count: [first, second + 1, third, fourth, fifth] })
+                .then(() => {});
+            } else if (finalEmotion === "sadness") {
+              chrome.storage.local
+                .set({ count: [first, second, third + 1, fourth, fifth] })
+                .then(() => {});
+            } else if (finalEmotion === "fear") {
+              chrome.storage.local
+                .set({ count: [first, second, third, fourth + 1, fifth] })
+                .then(() => {});
+            } else {
+              chrome.storage.local
+                .set({ count: [first, second, third, fourth, fifth + 1] })
+                .then(() => {});
+            }
+          }
+        });
         // alert(response[0][0]["label"]);
       });
     }
