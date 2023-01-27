@@ -1,8 +1,21 @@
-import React, { useState } from "react";
+/* global chrome*/
+import React from "react";
 import { Button, Stack, Grid } from "@mui/material";
+import { searchMusics } from "node-youtube-music";
 
 const Joy = () => {
-  const [listen, setListen] = useState();
+  const playVideo = async () => {
+    let artists;
+    let videoId;
+    await chrome.storage.local.get(["artists"]).then((result) => {
+      artists = Array.from(result.artists);
+      // alert(artists[0].slice(0, -2));
+    });
+    const musics = await searchMusics("Never gonna give you up");
+    alert(musics);
+
+    chrome.tabs.create({ url: `https://www.youtube.com/watch?v=${videoId}` });
+  };
   return (
     <>
       <div style={{ fontFamily: "Roboto Mono" }}>
@@ -49,47 +62,14 @@ const Joy = () => {
                 backgroundColor: "#F1F7B5",
                 color: "#243763",
               }}
-              // onClick={doThis}
-            >
-              Goals Diary
-            </Button>
-          </Stack>
-
-          <Stack direction="row" spacing={2}>
-            <Button
-              size="large"
-              variant="contained"
-              style={{
-                fontFamily: "Roboto Mono",
-                backgroundColor: "#F1F7B5",
-                color: "#243763",
-              }}
+              onClick={playVideo}
               // onClick={doThis}
             >
               Lets Listen
             </Button>
-            <Button
-              size="large"
-              variant="contained"
-              style={{
-                fontFamily: "Roboto Mono",
-                backgroundColor: "#F1F7B5",
-                color: "#243763",
-              }}
-              // onClick={doThis}
-            >
-              Fear Diary
-            </Button>
           </Stack>
         </Stack>
       </Grid>
-
-      <iframe
-        className="video"
-        title="Youtube player"
-        sandbox="allow-same-origin allow-forms allow-popups allow-scripts allow-presentation"
-        src={`https://youtube.com/embed/2g811Eo7K8U?autoplay=0`}
-      ></iframe>
     </>
   );
 };

@@ -187,9 +187,7 @@ export function InitialView(props) {
         ) : (
           <>
             {emotion === "neutral" && <Neutral />}
-            {emotion === "joy" && <Joy />}
-            {emotion === "love" && <Joy />}
-            {emotion === "surprise" && <Joy />}
+            {emotion === "happy" && <Joy />}
             {emotion === "anger" && <Neutral />}
             {emotion === "fear" && <Neutral />}
             {emotion === "sadness" && <Neutral />}

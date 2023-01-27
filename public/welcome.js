@@ -68,15 +68,19 @@ function focus() {
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
+function getText(num) {
+  return num.innerText;
+}
+
 async function saveValues(event) {
   event.preventDefault();
   const val = document.querySelector(".form__input").value;
-  const val2 = document.querySelector(".tags").children;
-  // const val2 = Array.from(query(".tags").children);
+  const val2 = Array.from(document.querySelector(".tags").children);
+  const finalNames = val2.map(getText);
   chrome.storage.local.set({ name: val }).then(() => {});
-  chrome.storage.local.set({ artists: val2 }).then(() => {});
+  chrome.storage.local.set({ artists: finalNames }).then(() => {});
   alert("Thanks for filling out the details!Happy SpotMood :)");
-  await sleep(4000);
+  await sleep(3000);
   window.close();
 }
 
