@@ -11,6 +11,7 @@
     "service_worker": "background.js"
   },
   "permissions": ["tabs", "scripting", "storage"],
+  "host_permissions": ["https://www.youtube.com/"],
   "manifest_version": 3,
   "version": "1",
   "action": {

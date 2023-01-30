@@ -1,7 +1,7 @@
 /* global chrome*/
 import React from "react";
 import { Button, Stack, Grid } from "@mui/material";
-// import { searchMusics } from "node-youtube-music";
+import youtubesearchapi from "youtube-search-api";
 
 const Joy = () => {
   const playVideo = async () => {
@@ -11,10 +11,13 @@ const Joy = () => {
       artists = Array.from(result.artists);
       // alert(artists[0].slice(0, -2));
     });
+
     // const musics = await searchMusics("Never gonna give you up");
     // alert(musics);
-
-    chrome.tabs.create({ url: `https://www.youtube.com/watch?v=${videoId}` });
+    youtubesearchapi
+      .GetListByKeyword("fletcher happy songs")
+      .then((res) => alert(res["items"]));
+    // chrome.tabs.create({ url: `https://www.youtube.com/watch?v=${videoId}` });
   };
   return (
     <>
