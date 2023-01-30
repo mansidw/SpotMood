@@ -1,18 +1,18 @@
 /* global chrome*/
 import React from "react";
 import { Button, Stack, Grid } from "@mui/material";
-import { searchMusics } from "node-youtube-music";
+// import { searchMusics } from "node-youtube-music";
 
 const Joy = () => {
   const playVideo = async () => {
     let artists;
-    let videoId;
+    let videoId = "20poedr";
     await chrome.storage.local.get(["artists"]).then((result) => {
       artists = Array.from(result.artists);
       // alert(artists[0].slice(0, -2));
     });
-    const musics = await searchMusics("Never gonna give you up");
-    alert(musics);
+    // const musics = await searchMusics("Never gonna give you up");
+    // alert(musics);
 
     chrome.tabs.create({ url: `https://www.youtube.com/watch?v=${videoId}` });
   };

@@ -20,13 +20,3 @@
 
 // Take care
 // wait until all the tabs have loaded
-
-import { searchMusics } from "node-youtube-music";
-// const { searchMusics } = require("node-youtube-music");
-
-async function getMusic() {
-  const musics = await searchMusics("Never gonna give you up");
-  console.log(musics);
-}
-
-getMusic();
