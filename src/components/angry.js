@@ -1,5 +1,5 @@
 /* global chrome*/
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../assets/css/angry.css";
 import { Button, Stack } from "@mui/material";
 import CooledDown from "../parts/cooledDown";
@@ -8,13 +8,20 @@ import waves from "../assets/images/waves.gif";
 import tree from "../assets/images/tree.gif";
 import dolphins from "../assets/images/dolphins.gif";
 import youtubesearchapi from "youtube-search-api";
+import Typed from "react-typed";
 
 const Angry = () => {
   const [number, setNumber] = useState(0);
   const [number2, setNumber2] = useState(0);
   const [cool, setCool] = useState(0);
+  const [happythings, setHappythings] = useState([]);
   let numbers = [0, 1, 2, 3];
   let newarr = [];
+
+  useEffect(() => {
+    var storedNames = JSON.parse(localStorage.getItem("happiness"));
+    setHappythings(storedNames);
+  }, []);
 
   const playVideo = async () => {
     let artists;
@@ -141,7 +148,29 @@ const Angry = () => {
               Listen to Calmness
             </Button>
           )}
-          {number === 3 && <p>fourth type</p>}
+          {number === 3 && (
+            <>
+              <div id="colours">Remember</div>
+              <div style={{ marginBottom: "20px" }}>
+                <span
+                  style={{
+                    fontSize: "20px",
+                    color: "#00425A",
+                  }}
+                >
+                  SMILE because you have
+                </span>
+                <span> </span>
+
+                <Typed
+                  strings={happythings}
+                  typeSpeed={60}
+                  loop
+                  style={{ fontSize: "22px", fontWeight: "bold" }}
+                />
+              </div>
+            </>
+          )}
 
           <Stack
             direction="row"
