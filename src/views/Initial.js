@@ -6,6 +6,7 @@ import { emotionDetection } from "../service/huggingFace";
 import "../assets/css/Loading.css";
 import Neutral from "../components/neutral";
 import Joy from "../components/joy";
+import Angry from "../components/angry";
 
 export function InitialView(props) {
   const [emotion, setEmotion] = useState("");
@@ -188,7 +189,7 @@ export function InitialView(props) {
           <>
             {emotion === "neutral" && <Neutral />}
             {emotion === "happy" && <Joy />}
-            {emotion === "anger" && <Neutral />}
+            {emotion === "anger" && <Angry />}
             {emotion === "fear" && <Neutral />}
             {emotion === "sadness" && <Neutral />}
             {/* <Typography

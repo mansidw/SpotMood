@@ -1,170 +1,170 @@
 #container {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 #container header {
-	text-align: center;
-	margin: 100px 0 50px;
+  text-align: center;
+  margin: 100px 0 50px;
 }
 
 #todos-app-container {
-	background-color: #965d62;
-	width: 300px;
-	min-height: 200px;
-	max-height: 100vh;
-	/* margin: auto 0; */
-    margin-top:10px;
-    margin-bottom:10px;
-    margin-left:15px;
-	padding: 2rem;
-	overflow: hidden;
+  background-color: #965d62;
+  width: 300px;
+  min-height: 200px;
+  max-height: 100vh;
+  /* margin: auto 0; */
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 15px;
+  padding: 2rem;
+  overflow: hidden;
 }
 
 #header {
-	padding: 0.5rem;
+  padding: 0.5rem;
 }
 
 #header h2 {
-	margin: 0;
-	text-align: center;
-	color: #fff;
+  margin: 0;
+  text-align: center;
+  color: #fff;
 }
 
 #new-task {
-	display: flex;
-	width: 100%;
-	justify-content: center;
-	padding: 0 10px;
-	align-items: center;
-	height: 3rem;
-	border-bottom: 2px solid #fff;
-	border-top: 2px solid #fff;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  padding: 0 10px;
+  align-items: center;
+  height: 3rem;
+  border-bottom: 2px solid #fff;
+  border-top: 2px solid #fff;
 }
 
 #new-task input,
 #new-task span {
-	height: 1rem;
+  height: 1rem;
 }
 
 #new-task input {
-	flex: 11;
-	background: none;
-	border: none;
-	outline: none;
-	font-size: 1.2rem;
-	color: #fff;
+  flex: 11;
+  background: none;
+  border: none;
+  outline: none;
+  font-size: 1.2rem;
+  color: #fff;
 }
 
 #new-task input::placeholder {
-	color: rgba(255, 255, 255, 0.6);
+  color: rgba(255, 255, 255, 0.6);
 }
 
 #new-task button {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	width: 32px;
-	font-size: 2rem;
-	background: none;
-	border: none;
-	outline: none;
-	color: #fff;
-	cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  font-size: 2rem;
+  background: none;
+  border: none;
+  outline: none;
+  color: #fff;
+  cursor: pointer;
 }
 
 #tasks-container {
-	padding: -2rem 0;
-	color: #fff;
+  padding: -2rem 0;
+  color: #fff;
 }
 
 .task-item {
-	padding: 0rem 11px;
-	border-bottom: 1px solid#fff;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
+  padding: 0rem 11px;
+  border-bottom: 1px solid#fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .text-div {
-	position: relative;
-	width: 80%;
-	height: 0.5rem;
+  position: relative;
+  width: 80%;
+  height: 0.5rem;
 }
 
 .text-div p,
 .text-div input {
-	position: absolute;
-	top: 50%;
-	left: 0;
-	transform: translateY(-50%);
-	margin: 0;
-	padding: 0;
-	font-size: 1.2rem;
-	color: #fff;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  margin: 0;
+  padding: 0;
+  font-size: 1.2rem;
+  color: #fff;
 }
 .text-div p {
-	cursor: pointer;
-	transition: color 300ms;
+  cursor: pointer;
+  transition: color 300ms;
 }
 
 .hide {
-	visibility: hidden;
+  visibility: hidden;
 }
 
 .text-div input {
-	background: none;
-	border: none;
-	width: 450px;
+  background: none;
+  border: none;
+  width: 450px;
 }
 
 .text-div input::placeholder {
-	color: rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.5);
 }
 
 .text-div input:focus {
-	border: none;
-	outline: none;
+  border: none;
+  outline: none;
 }
 .done {
-	color: black !important;
+  color: black !important;
 }
 
 .done::before {
-	display: inline-block;
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, 50%);
-	content: "";
-	width: 100%;
-	height: 1.5px;
-	background-color: black;
+  display: inline-block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, 50%);
+  content: "";
+  width: 100%;
+  height: 1.5px;
+  background-color: black;
 }
 
 .icon-div {
-	overflow: hidden;
+  overflow: hidden;
 }
 
 .icon-div span {
-	display: inline-block;
-	margin-left: 8px;
-	cursor: pointer;
-	font-size: 0.9rem;
-	color: rgba(255, 255, 255, 0.6);
-	transform: translateX(50px);
-	transition: 400ms;
+  display: inline-block;
+  margin-left: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.6);
+  transform: translateX(50px);
+  transition: 400ms;
 }
 
 .icon-div span:hover {
-	color: #fff;
+  color: #fff;
 }
 
 .fix {
-	transform: translateX(20px) !important;
+  transform: translateX(20px) !important;
 }
 
 .task-item:hover span {
-	transform: translateX(0);
+  transform: translateX(0);
 }
