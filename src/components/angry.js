@@ -1,11 +1,13 @@
+/* global chrome*/
 import React, { useState } from "react";
 import "../assets/css/angry.css";
 import { Button, Stack } from "@mui/material";
 import CooledDown from "../parts/cooledDown";
-import bubbles from "../assets/images/bubble.gif";
+import calmdown from "../assets/images/calmdown.gif";
 import waves from "../assets/images/waves.gif";
 import tree from "../assets/images/tree.gif";
 import dolphins from "../assets/images/dolphins.gif";
+import youtubesearchapi from "youtube-search-api";
 
 const Angry = () => {
   const [number, setNumber] = useState(0);
@@ -13,6 +15,26 @@ const Angry = () => {
   const [cool, setCool] = useState(0);
   let numbers = [0, 1, 2, 3];
   let newarr = [];
+
+  const playVideo = async () => {
+    let artists;
+    await chrome.storage.local.get(["artists"]).then((result) => {
+      artists = Array.from(result.artists);
+    });
+
+    for (let i of artists) {
+      youtubesearchapi
+        .GetListByKeyword(`${i.slice(0, -2)} calm songs`)
+        .then((res) => {
+          if (res["items"].length > 0) {
+            chrome.tabs.create({
+              url: `https://www.youtube.com/watch?v=${res["items"][0]["id"]}`,
+            });
+          }
+        });
+    }
+  };
+
   function shuffle(o) {
     for (
       var j, x, i = o.length;
@@ -68,13 +90,14 @@ const Angry = () => {
                   fontSize: "20px",
                   color: "#00425A",
                   fontWeight: "bold",
+                  paddingTop: "10px",
                 }}
               >
                 R-E-L-A-X 🌔
               </div>
               {number2 === 0 && (
                 <img
-                  src={bubbles}
+                  src={calmdown}
                   alt="meditation"
                   style={{ height: "300px", width: "370px" }}
                 />
@@ -102,7 +125,22 @@ const Angry = () => {
               )}
             </>
           )}
-          {number === 2 && <p>tird type</p>}
+          {number === 2 && (
+            <Button
+              size="large"
+              variant="contained"
+              style={{
+                fontFamily: "Roboto Mono",
+                backgroundColor: "#F1F7B5",
+                color: "#243763",
+                marginTop: "20px",
+                marginBottom: "20px",
+              }}
+              onClick={playVideo}
+            >
+              Listen to Calmness
+            </Button>
+          )}
           {number === 3 && <p>fourth type</p>}
 
           <Stack
