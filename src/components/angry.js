@@ -2,9 +2,14 @@ import React, { useState } from "react";
 import "../assets/css/angry.css";
 import { Button, Stack } from "@mui/material";
 import CooledDown from "../parts/cooledDown";
+import bubbles from "../assets/images/bubble.gif";
+import waves from "../assets/images/waves.gif";
+import tree from "../assets/images/tree.gif";
+import dolphins from "../assets/images/dolphins.gif";
 
 const Angry = () => {
   const [number, setNumber] = useState(0);
+  const [number2, setNumber2] = useState(0);
   const [cool, setCool] = useState(0);
   let numbers = [0, 1, 2, 3];
   let newarr = [];
@@ -21,6 +26,7 @@ const Angry = () => {
       newarr = shuffle(numbers);
     }
     setNumber(newarr.pop());
+    setNumber2(Math.floor(Math.random() * 4));
   }
 
   return (
@@ -30,7 +36,6 @@ const Angry = () => {
           <div
             style={{
               fontFamily: "Roboto Mono",
-              paddingBottom: "68px",
               fontSize: "15px",
             }}
           >
@@ -44,51 +49,59 @@ const Angry = () => {
           </div>
           {/* breathing exercise */}
           {number === 0 && (
-            <div class="illustration">
-              <div class="yogi-lady">
-                <div class="breath">
-                  <div class="inhale"></div>
-                  <div class="exhale"></div>
-                  <div class="hold hold1"></div>
-                  <div class="hold hold2"></div>
-                  <span class="text inhale-text">inhale</span>
-                  <span class="text hold1-text">hold</span>
-                  <span class="text exhale-text">exhale</span>
-                  <span class="text hold2-text">hold</span>
-                </div>
-                <div class="hair">
-                  <div class="face-up">
-                    <div class="eyes"></div>
-                  </div>
-                  <div class="face body">
-                    <div class="nose"></div>
-                    <div class="lips"></div>
-                  </div>
-                  <div class="neck body"></div>
-                  <div class="tshirt"></div>
-                  <div class="decoltee body"></div>
-                </div>
-                <div class="arms body"></div>
-                <div class="right-hand body">
-                  <div class="right-hand-in">
-                    <div class="finger finger-1"></div>
-                    <div class="finger finger-2"></div>
-                    <div class="finger finger-3"></div>
-                    <div class="finger finger-4"></div>
-                  </div>
-                </div>
-                <div class="left-hand body">
-                  <div class="left-hand-in">
-                    <div class="finger-l finger-l-1"></div>
-                    <div class="finger-l finger-l-2"></div>
-                    <div class="finger-l finger-l-3"></div>
-                    <div class="finger-l finger-l-4"></div>
+            <div class="main">
+              <div class="wrap">
+                <div class="center">
+                  <p class="exhale">exhale</p>
+                  <div class="breathe-ball center">
+                    <p class="inhale">inhale</p>
                   </div>
                 </div>
               </div>
             </div>
           )}
-          {number === 1 && <p>second type</p>}
+          {number === 1 && (
+            <>
+              <div
+                style={{
+                  fontFamily: "Roboto Mono",
+                  fontSize: "20px",
+                  color: "#00425A",
+                  fontWeight: "bold",
+                }}
+              >
+                R-E-L-A-X 🌔
+              </div>
+              {number2 === 0 && (
+                <img
+                  src={bubbles}
+                  alt="meditation"
+                  style={{ height: "300px", width: "370px" }}
+                />
+              )}
+              {number2 === 1 && (
+                <img
+                  src={waves}
+                  alt="meditation"
+                  style={{ height: "300px", width: "370px" }}
+                />
+              )}
+              {number2 === 2 && (
+                <img
+                  src={tree}
+                  alt="meditation"
+                  style={{ height: "300px", width: "370px" }}
+                />
+              )}
+              {number2 === 3 && (
+                <img
+                  src={dolphins}
+                  alt="meditation"
+                  style={{ height: "300px", width: "370px" }}
+                />
+              )}
+            </>
+          )}
           {number === 2 && <p>tird type</p>}
           {number === 3 && <p>fourth type</p>}
 
