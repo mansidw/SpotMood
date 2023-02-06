@@ -15,7 +15,9 @@ export function ErrorView() {
           <li style={{ fontFamily: "Roboto Mono" }}>
             Make sure you have active internet connection
           </li>
-          <li style={{ fontFamily: "Roboto Mono" }}>Reload website.</li>
+          <li style={{ fontFamily: "Roboto Mono" }}>
+            Make sure all the tabs have loaded successfully
+          </li>
           <li style={{ fontFamily: "Roboto Mono" }}>Reinstall extension.</li>
         </ul>
         <br />

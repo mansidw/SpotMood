@@ -13,4 +13,6 @@
 2) Option for user to edit his/her previously entered information so the extesnion remains up to date in recommendations
 3) The song recommendations are constant for now try to change them everytime user listens to it
 4) After angry - on clicking I'm cool now try to gather some information about ehat led the anger to cool down
+5) Try to improve some code structure
+6) Do something about the unfilled diary error
 

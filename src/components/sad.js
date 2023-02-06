@@ -1,19 +1,16 @@
 /* global chrome*/
-import React, { useState, useEffect } from "react";
-import "../assets/css/angry.css";
-import { Button, Stack } from "@mui/material";
+import React, { useEffect, useState } from "react";
 import CooledDown from "../parts/cooledDown";
-import calmdown from "../assets/images/calmdown.gif";
-import waves from "../assets/images/waves.gif";
-import tree from "../assets/images/tree.gif";
-import dolphins from "../assets/images/dolphins.gif";
+import { Button, Stack } from "@mui/material";
 import youtubesearchapi from "youtube-search-api";
 import Typed from "react-typed";
+import giveMeAJoke from "give-me-a-joke";
 
-const Angry = () => {
+const Sad = () => {
+  const [cool, setCool] = useState(false);
   const [number, setNumber] = useState(0);
-  const [number2, setNumber2] = useState(0);
-  const [cool, setCool] = useState(0);
+  const [joke, setJoke] = useState("");
+  const [nextpls, setNextpls] = useState(false);
   const [happythings, setHappythings] = useState([]);
   let numbers = [0, 1, 2, 3];
   let newarr = [];
@@ -23,22 +20,39 @@ const Angry = () => {
     setHappythings(storedNames);
   }, []);
 
-  const playVideo = async () => {
+  //   for the joke api calling
+  useEffect(() => {
+    giveMeAJoke.getRandomDadJoke(function (joke) {
+      setJoke(joke);
+    });
+  }, [nextpls]);
+
+  const playVideo = async (daya) => {
     let artists;
     await chrome.storage.local.get(["artists"]).then((result) => {
       artists = Array.from(result.artists);
     });
 
-    for (let i of artists) {
-      youtubesearchapi
-        .GetListByKeyword(`${i.slice(0, -2)} calm songs`)
-        .then((res) => {
-          if (res["items"].length > 0) {
-            chrome.tabs.create({
-              url: `https://www.youtube.com/watch?v=${res["items"][0]["id"]}`,
-            });
-          }
-        });
+    if (daya === "songs") {
+      for (let i of artists) {
+        youtubesearchapi
+          .GetListByKeyword(`${i.slice(0, -2)} happy songs`)
+          .then((res) => {
+            if (res["items"].length > 0) {
+              chrome.tabs.create({
+                url: `https://www.youtube.com/watch?v=${res["items"][0]["id"]}`,
+              });
+            }
+          });
+      }
+    } else {
+      youtubesearchapi.GetListByKeyword(daya).then((res) => {
+        if (res["items"].length > 0) {
+          chrome.tabs.create({
+            url: `https://www.youtube.com/watch?v=${res["items"][0]["id"]}`,
+          });
+        }
+      });
     }
   };
 
@@ -56,9 +70,7 @@ const Angry = () => {
       newarr = shuffle(numbers);
     }
     setNumber(newarr.pop());
-    setNumber2(Math.floor(Math.random() * 4));
   }
-
   return (
     <>
       {!cool ? (
@@ -69,87 +81,90 @@ const Angry = () => {
               fontSize: "15px",
             }}
           >
-            Why so
+            This will
             <span> </span>
             <span
               style={{ fontSize: "20px", color: "#00425A", fontWeight: "bold" }}
             >
-              CROSS 😠?
+              PASS TOOO 🥺...
             </span>
           </div>
-          {/* breathing exercise */}
-          {number === 0 && (
-            <div class="main">
-              <div class="wrap">
-                <div class="center">
-                  <p class="exhale">exhale</p>
-                  <div class="breathe-ball center">
-                    <p class="inhale">inhale</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
-          {number === 1 && (
+
+          {number === 0 && joke && (
             <>
               <div
                 style={{
                   fontFamily: "Roboto Mono",
                   fontSize: "20px",
                   color: "#00425A",
+                  paddingTop: "10px",
                   fontWeight: "bold",
+                }}
+              >
+                😆 LOL 😆
+              </div>
+              <div
+                style={{
+                  fontFamily: "Roboto Mono",
+                  fontSize: "20px",
+                  color: "#00425A",
                   paddingTop: "10px",
                 }}
               >
-                R-E-L-A-X 🌔
+                {joke}
               </div>
-              {number2 === 0 && (
-                <img
-                  src={calmdown}
-                  alt="meditation"
-                  style={{ height: "300px", width: "370px" }}
-                />
-              )}
-              {number2 === 1 && (
-                <img
-                  src={waves}
-                  alt="meditation"
-                  style={{ height: "300px", width: "370px" }}
-                />
-              )}
-              {number2 === 2 && (
-                <img
-                  src={tree}
-                  alt="meditation"
-                  style={{ height: "300px", width: "370px" }}
-                />
-              )}
-              {number2 === 3 && (
-                <img
-                  src={dolphins}
-                  alt="meditation"
-                  style={{ height: "300px", width: "370px" }}
-                />
-              )}
+              <Button
+                size="large"
+                variant="contained"
+                style={{
+                  fontFamily: "Roboto Mono",
+                  backgroundColor: "#FF8B13",
+                  color: "white",
+                  marginTop: "20px",
+                  marginBottom: "20px",
+                }}
+                onClick={() => setNextpls(!nextpls)}
+              >
+                Next Please ▶️
+              </Button>
             </>
           )}
+
+          {number === 1 && (
+            <Button
+              size="large"
+              variant="contained"
+              style={{
+                fontFamily: "Roboto Mono",
+                backgroundColor: "#FF8B13",
+                color: "black",
+                marginTop: "20px",
+                marginBottom: "20px",
+              }}
+              onClick={() => playVideo("funny animal videos")}
+            >
+              Just make me smile :(
+            </Button>
+          )}
+
           {number === 2 && (
             <Button
               size="large"
               variant="contained"
               style={{
                 fontFamily: "Roboto Mono",
-                backgroundColor: "#F1F7B5",
-                color: "#243763",
+                backgroundColor: "#FF8B13",
+                color: "black",
                 marginTop: "20px",
                 marginBottom: "20px",
               }}
-              onClick={playVideo}
+              onClick={() => playVideo("songs")}
             >
-              Listen to Calmness
+              Listen to Music!
             </Button>
           )}
-          {number === 3 && (
+
+          {number === 3 && happythings && (
             <>
               <div id="colours">Remember</div>
               <div style={{ marginBottom: "20px" }}>
@@ -172,7 +187,6 @@ const Angry = () => {
               </div>
             </>
           )}
-
           <Stack
             direction="row"
             spacing={2}
@@ -185,8 +199,8 @@ const Angry = () => {
               variant="contained"
               style={{
                 fontFamily: "Roboto Mono",
-                backgroundColor: "#F1F7B5",
-                color: "#243763",
+                backgroundColor: "#FF8B13",
+                color: "black",
                 marginTop: "6px",
               }}
               onClick={numberGenerator}
@@ -198,13 +212,13 @@ const Angry = () => {
               variant="contained"
               style={{
                 fontFamily: "Roboto Mono",
-                backgroundColor: "#F1F7B5",
-                color: "#243763",
+                backgroundColor: "#FF8B13",
+                color: "black",
                 marginTop: "6px",
               }}
               onClick={() => setCool(1)}
             >
-              I'm cooool now!
+              I'm happpy now!
             </Button>
           </Stack>
         </>
@@ -215,4 +229,4 @@ const Angry = () => {
   );
 };
 
-export default Angry;
+export default Sad;

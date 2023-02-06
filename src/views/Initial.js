@@ -7,6 +7,7 @@ import "../assets/css/Loading.css";
 import Neutral from "../components/neutral";
 import Joy from "../components/joy";
 import Angry from "../components/angry";
+import Sad from "../components/sad";
 
 export function InitialView(props) {
   const [emotion, setEmotion] = useState("");
@@ -187,11 +188,11 @@ export function InitialView(props) {
           </>
         ) : (
           <>
-            {emotion === "neutral" && <Neutral />}
+            {emotion === "neutral" && <Sad />}
             {emotion === "happy" && <Joy />}
             {emotion === "anger" && <Angry />}
             {emotion === "fear" && <Neutral />}
-            {emotion === "sadness" && <Neutral />}
+            {emotion === "sadness" && <Sad />}
             {/* <Typography
               variant="h4"
               component="h4"
