@@ -1,31 +1,24 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 import CooledDown from "../parts/cooledDown";
 import { Button, Stack } from "@mui/material";
 import { playVideo } from "../helper/youtubeVideoGenerator";
 import { numberGenerator } from "../helper/randomNumberGenerator";
-import Typed from "react-typed";
-import giveMeAJoke from "give-me-a-joke";
 
-const Sad = () => {
+const Fear = () => {
+  const [inspiration, setInspiration] = useState();
   const [cool, setCool] = useState(false);
   const [number, setNumber] = useState(0);
-  const [joke, setJoke] = useState("");
-  const [nextpls, setNextpls] = useState(false);
-  const [happythings, setHappythings] = useState([]);
-  let numbers = [0, 1, 2, 3];
-
+  let numbers = [0, 1, 2];
   useEffect(() => {
-    var storedNames = JSON.parse(localStorage.getItem("happiness"));
-    setHappythings(storedNames);
+    axios
+      .get("https://zenquotes.io/api/random")
+      .then((res) => {
+        setInspiration(res);
+        console.log(res);
+      })
+      .catch((err) => console.log(err));
   }, []);
-
-  //   for the joke api calling
-  useEffect(() => {
-    giveMeAJoke.getRandomDadJoke(function (joke) {
-      setJoke(joke);
-    });
-  }, [nextpls]);
-
   return (
     <>
       {!cool ? (
@@ -36,16 +29,16 @@ const Sad = () => {
               fontSize: "15px",
             }}
           >
-            This will
+            Let go of your
             <span> </span>
             <span
               style={{ fontSize: "20px", color: "#00425A", fontWeight: "bold" }}
             >
-              PASS TOOO 🥺...
+              FEAR 🦌
             </span>
           </div>
 
-          {number === 0 && joke && (
+          {number === 0 && inspiration && (
             <>
               <div
                 style={{
@@ -56,7 +49,7 @@ const Sad = () => {
                   fontWeight: "bold",
                 }}
               >
-                😆 LOL 😆
+                QUOTE QUOTA 📎
               </div>
               <div
                 style={{
@@ -66,22 +59,8 @@ const Sad = () => {
                   paddingTop: "10px",
                 }}
               >
-                {joke}
+                {inspiration["data"][0]["q"]}
               </div>
-              <Button
-                size="large"
-                variant="contained"
-                style={{
-                  fontFamily: "Roboto Mono",
-                  backgroundColor: "#FF8B13",
-                  color: "white",
-                  marginTop: "20px",
-                  marginBottom: "20px",
-                }}
-                onClick={() => setNextpls(!nextpls)}
-              >
-                Next Please ▶️
-              </Button>
             </>
           )}
 
@@ -96,9 +75,9 @@ const Sad = () => {
                 marginTop: "20px",
                 marginBottom: "20px",
               }}
-              onClick={() => playVideo("funny animal videos")}
+              onClick={() => playVideo("happy songs")}
             >
-              Just make me smile :(
+              Listen to Calmness
             </Button>
           )}
 
@@ -113,35 +92,12 @@ const Sad = () => {
                 marginTop: "20px",
                 marginBottom: "20px",
               }}
-              onClick={() => playVideo("happy songs")}
+              onClick={() => playVideo("motivational fearless talks")}
             >
-              Listen to Music!
+              Motivation 101 🧲
             </Button>
           )}
 
-          {number === 3 && happythings && (
-            <>
-              <div id="colours">Remember</div>
-              <div style={{ marginBottom: "20px" }}>
-                <span
-                  style={{
-                    fontSize: "20px",
-                    color: "#00425A",
-                  }}
-                >
-                  SMILE because you have
-                </span>
-                <span> </span>
-
-                <Typed
-                  strings={happythings}
-                  typeSpeed={60}
-                  loop
-                  style={{ fontSize: "22px", fontWeight: "bold" }}
-                />
-              </div>
-            </>
-          )}
           <Stack
             direction="row"
             spacing={2}
@@ -173,7 +129,7 @@ const Sad = () => {
               }}
               onClick={() => setCool(1)}
             >
-              I'm happpy now!
+              I'm fearlesss now!
             </Button>
           </Stack>
         </>
@@ -184,4 +140,4 @@ const Sad = () => {
   );
 };
 
-export default Sad;
+export default Fear;

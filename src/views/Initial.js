@@ -8,6 +8,7 @@ import Neutral from "../components/neutral";
 import Joy from "../components/joy";
 import Angry from "../components/angry";
 import Sad from "../components/sad";
+import Fear from "../components/fear";
 
 export function InitialView(props) {
   const [emotion, setEmotion] = useState("");
@@ -166,6 +167,7 @@ export function InitialView(props) {
                 width: "400px",
                 textAlign: "center",
                 fontFamily: "Roboto Mono",
+                color: "#00425A",
               }}
             >
               Based on the tabs opened I suggest you are feeling...
@@ -188,10 +190,10 @@ export function InitialView(props) {
           </>
         ) : (
           <>
-            {emotion === "neutral" && <Sad />}
+            {emotion === "neutral" && <Neutral />}
             {emotion === "happy" && <Joy />}
             {emotion === "anger" && <Angry />}
-            {emotion === "fear" && <Neutral />}
+            {emotion === "fear" && <Fear />}
             {emotion === "sadness" && <Sad />}
             {/* <Typography
               variant="h4"

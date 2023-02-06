@@ -1,4 +1,3 @@
-/* global chrome*/
 import React, { useState, useEffect } from "react";
 import "../assets/css/angry.css";
 import { Button, Stack } from "@mui/material";
@@ -7,8 +6,9 @@ import calmdown from "../assets/images/calmdown.gif";
 import waves from "../assets/images/waves.gif";
 import tree from "../assets/images/tree.gif";
 import dolphins from "../assets/images/dolphins.gif";
-import youtubesearchapi from "youtube-search-api";
 import Typed from "react-typed";
+import { playVideo } from "../helper/youtubeVideoGenerator";
+import { numberGenerator } from "../helper/randomNumberGenerator";
 
 const Angry = () => {
   const [number, setNumber] = useState(0);
@@ -16,48 +16,11 @@ const Angry = () => {
   const [cool, setCool] = useState(0);
   const [happythings, setHappythings] = useState([]);
   let numbers = [0, 1, 2, 3];
-  let newarr = [];
 
   useEffect(() => {
     var storedNames = JSON.parse(localStorage.getItem("happiness"));
     setHappythings(storedNames);
   }, []);
-
-  const playVideo = async () => {
-    let artists;
-    await chrome.storage.local.get(["artists"]).then((result) => {
-      artists = Array.from(result.artists);
-    });
-
-    for (let i of artists) {
-      youtubesearchapi
-        .GetListByKeyword(`${i.slice(0, -2)} calm songs`)
-        .then((res) => {
-          if (res["items"].length > 0) {
-            chrome.tabs.create({
-              url: `https://www.youtube.com/watch?v=${res["items"][0]["id"]}`,
-            });
-          }
-        });
-    }
-  };
-
-  function shuffle(o) {
-    for (
-      var j, x, i = o.length;
-      i;
-      j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x
-    );
-    return o;
-  }
-
-  function numberGenerator() {
-    if (newarr.length === 0) {
-      newarr = shuffle(numbers);
-    }
-    setNumber(newarr.pop());
-    setNumber2(Math.floor(Math.random() * 4));
-  }
 
   return (
     <>
@@ -144,12 +107,12 @@ const Angry = () => {
                 marginTop: "20px",
                 marginBottom: "20px",
               }}
-              onClick={playVideo}
+              onClick={() => playVideo("calm songs")}
             >
               Listen to Calmness
             </Button>
           )}
-          {number === 3 && (
+          {number === 3 && happythings && (
             <>
               <div id="colours">Remember</div>
               <div style={{ marginBottom: "20px" }}>
@@ -189,7 +152,10 @@ const Angry = () => {
                 color: "#243763",
                 marginTop: "6px",
               }}
-              onClick={numberGenerator}
+              onClick={() => {
+                setNumber(numberGenerator(numbers));
+                setNumber2(Math.floor(Math.random() * 4));
+              }}
             >
               Something Else
             </Button>

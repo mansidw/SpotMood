@@ -1,29 +1,10 @@
-/* global chrome*/
 import React, { useState } from "react";
 import { Button, Stack, Grid } from "@mui/material";
-import youtubesearchapi from "youtube-search-api";
 import HappyDiary from "../parts/happyDiary";
+import { playVideo } from "../helper/youtubeVideoGenerator";
 
 const Joy = () => {
   const [opendiary, setOpendiary] = useState(false);
-  const playVideo = async () => {
-    let artists;
-    await chrome.storage.local.get(["artists"]).then((result) => {
-      artists = Array.from(result.artists);
-    });
-
-    for (let i of artists) {
-      youtubesearchapi
-        .GetListByKeyword(`${i.slice(0, -2)} happy songs`)
-        .then((res) => {
-          if (res["items"].length > 0) {
-            chrome.tabs.create({
-              url: `https://www.youtube.com/watch?v=${res["items"][0]["id"]}`,
-            });
-          }
-        });
-    }
-  };
 
   const openDiary = () => setOpendiary(true);
   const closeDiary = (things) => {
@@ -79,10 +60,10 @@ const Joy = () => {
                   backgroundColor: "#F1F7B5",
                   color: "#243763",
                 }}
-                onClick={playVideo}
+                onClick={() => playVideo("happy songs")}
                 // onClick={doThis}
               >
-                Lets Listen
+                Lets Listen Happy
               </Button>
             </Stack>
           </Stack>
