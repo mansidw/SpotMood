@@ -3,7 +3,7 @@
 2) According to the calculated emotion let the user perform certain activities - 
 	- HAPPY : Write down in your personal diary (through extension) what exactly caused you to be joyous?, Listen to some happy favourites kind of playlist (we open all your favorites) ✅ 
 	- ANGER : breathing exercise performer, mindful exercises for calming down, listen to some calm down mix, sit quiet and read things that make you happy from your diary! ✅ 
-	- SADNESS : go to your personal diary and read the things that had previously made you happy, listen to life sucks playlist, view some funny youtube videos (random recommendation), show jokes, smile videos (animals specifically)
+	- SADNESS : go to your personal diary and read the things that had previously made you happy, listen to life sucks playlist, view some funny youtube videos (random recommendation), show jokes, smile videos (animals specifically) ✅ 
 	- FEAR : listen to calm down songs, some inspirational quotes,voices or talks from famous people, talk to people who will listen
 3) Keep storing this user information and use it for better recommendations
 4) Finally give the user an option of viewing their months performance basically happiness score leaderboard (Analytics)
