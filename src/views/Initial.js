@@ -9,10 +9,12 @@ import Joy from "../components/joy";
 import Angry from "../components/angry";
 import Sad from "../components/sad";
 import Fear from "../components/fear";
+import Analysis from "../components/analysis";
 
 export function InitialView(props) {
   const [emotion, setEmotion] = useState("");
   const [opentabs, setOpentabs] = useState([]);
+  const [analysis, setAnalysis] = useState(0);
 
   useEffect(() => {
     (async () => {
@@ -159,66 +161,70 @@ export function InitialView(props) {
 
   return (
     <>
-      <div className="center-view" style={{ paddingTop: "10px" }}>
-        {!emotion ? (
-          <>
-            <Typography
-              style={{
-                width: "400px",
-                textAlign: "center",
-                fontFamily: "Roboto Mono",
-                color: "#00425A",
-              }}
-            >
-              Based on the tabs opened I suggest you are feeling...
-            </Typography>
-            <br />
-            <div id="loaderSvgWrapper">
-              <svg
-                xmlnsSvg="www.w3.org/2000/svg"
-                width="200px"
-                height="200px"
-                viewbox="0 0 200 200"
-                id="preloader"
+      {!analysis ? (
+        <div className="center-view" style={{ paddingTop: "10px" }}>
+          {!emotion ? (
+            <>
+              <Typography
+                style={{
+                  width: "400px",
+                  textAlign: "center",
+                  fontFamily: "Roboto Mono",
+                  color: "#00425A",
+                }}
               >
-                <circle cx="100" cy="100" r="3" id="red" />
-                <circle cx="100" cy="100" r="8" id="orange" />
-                <circle cx="100" cy="100" r="13" id="yellow" />
-                <circle cx="100" cy="100" r="18" id="green" />
-              </svg>
-            </div>
-          </>
-        ) : (
-          <>
-            {emotion === "neutral" && <Neutral />}
-            {emotion === "happy" && <Joy />}
-            {emotion === "anger" && <Angry />}
-            {emotion === "fear" && <Fear />}
-            {emotion === "sadness" && <Sad />}
-            {/* <Typography
+                Based on the tabs opened I suggest you are feeling...
+              </Typography>
+              <br />
+              <div id="loaderSvgWrapper">
+                <svg
+                  xmlnsSvg="www.w3.org/2000/svg"
+                  width="200px"
+                  height="200px"
+                  viewbox="0 0 200 200"
+                  id="preloader"
+                >
+                  <circle cx="100" cy="100" r="3" id="red" />
+                  <circle cx="100" cy="100" r="8" id="orange" />
+                  <circle cx="100" cy="100" r="13" id="yellow" />
+                  <circle cx="100" cy="100" r="18" id="green" />
+                </svg>
+              </div>
+            </>
+          ) : (
+            <>
+              {emotion === "neutral" && <Neutral />}
+              {emotion === "happy" && <Joy />}
+              {emotion === "anger" && <Angry />}
+              {emotion === "fear" && <Fear />}
+              {emotion === "sadness" && <Sad />}
+              {/* <Typography
               variant="h4"
               component="h4"
               style={{ fontFamily: "Roboto Mono" }}
             >
               {emotion}
             </Typography> */}
-            <Button
-              size="large"
-              variant="contained"
-              style={{
-                fontFamily: "Roboto Mono",
-                marginBottom: "20px",
-                backgroundColor: "#E3ACF9",
-                color: "#3D1766",
-              }}
-              // onClick={doThis}
-            >
-              Get Analysis
-            </Button>
-          </>
-        )}
-        <br />
-      </div>
+              <Button
+                size="large"
+                variant="contained"
+                style={{
+                  fontFamily: "Roboto Mono",
+                  marginBottom: "20px",
+                  backgroundColor: "#E3ACF9",
+                  color: "#3D1766",
+                }}
+                onClick={() => setAnalysis(1)}
+              >
+                Get Analysis
+              </Button>
+            </>
+          )}
+          <br />
+        </div>
+      ) : (
+        <Analysis />
+      )}
     </>
   );
 }
