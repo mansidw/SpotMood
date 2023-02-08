@@ -23,9 +23,9 @@ export function InitialView(props) {
           setOpentabs(tabs.map((tab) => ({ title: tab.title, url: tab.url })));
         });
 
-        await chrome.storage.local.get({ count: [] }).then((result) => {
-          alert(result.count);
-        });
+        // await chrome.storage.local.get({ count: [] }).then((result) => {
+        //   alert(result.count);
+        // });
       } catch (e) {
         alert("not loaded");
         props.setExtensionView("error");
@@ -40,7 +40,7 @@ export function InitialView(props) {
       totalTitle = totalTitle + opentabs.map((obj) => obj.title);
 
       emotionDetection({ inputs: totalTitle }).then((response) => {
-        alert(JSON.stringify(response));
+        // alert(JSON.stringify(response));
         let finalEmotion;
         // if (
         //   response[0][0]["score"] - response[0][1]["score"] <= 0.2 &&
